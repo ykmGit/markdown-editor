@@ -1,11 +1,12 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { putMemo } from '../indexeddb/memos'
-import { Button } from '../components/button'
+// import { Button } from '../components/button'
 import { SaveModal } from '../components/save_modal'
 import { Link } from 'react-router-dom'
 import { Header } from '../components/header'
 import ConvertMarkdownWorker from 'worker-loader!../worker/convert_markdown_worker'
+import Button from '@material-ui/core/Button';
 
 const convertMarkdownWorker = new ConvertMarkdownWorker()
 const { useState, useEffect } = React
@@ -74,7 +75,7 @@ export const Editor: React.FC<Props> = (props) => {
     <>
       <HeaderArea>
         <Header title="Markdown Editor">
-          <Button onClick={() => setShowModal(true)}>
+          <Button onClick={() => setShowModal(true)} variant="outlined" color="primary">
             保存する
           </Button>
           <Link to="/history">

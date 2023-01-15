@@ -4,12 +4,14 @@ import styled from 'styled-components'
 import { createGlobalStyle } from 'styled-components'
 import {
   HashRouter as Router,
+  BrowserRouter,
   Switch,
   Route,
   Redirect,
+  Link,
 } from 'react-router-dom'
-import { Editor } from './pages/editor'
-import { History } from './pages/history'
+import { EditorIndex } from './pages/editorIndex'
+import { ButtonBases } from './pages/buttonBases'
 import { useStateWithStorage } from './hooks/use_state_with_storage'
 
 const GlobalStyle = createGlobalStyle`
@@ -18,32 +20,26 @@ body * {
 }
 `
 
-const StorageKey = '/editor:text'
 
 const Main: React.FC = () => {
-  const [text, setText] = useStateWithStorage('', StorageKey)
 
   return (
     <>
-      <GlobalStyle />
-      <Router>
+      <ButtonBases />
+      <BrowserRouter>
+        <Link to="/EditorIndex">Editor</Link>
         <Switch>
-          <Route exact path="/editor">
-            <Editor
-              text={text}
-              setText={setText}
-            />
+          <Route exact path="/index">
+            <EditorIndex />
           </Route>
-          <Route exact path="/history">
-            <History
-              setText={setText}
-            />
-          </Route>
-          <Redirect to="/editor" path="*" />
         </Switch>
-      </Router>
+      </BrowserRouter>
     </>
   )
 }
 
 render(<Main />, document.getElementById('app'))
+
+
+
+
